@@ -1,4 +1,4 @@
-package ru.gb.meshch;
+package ru.gb.meshch.lesson1;
 
 /* Презентация "Классы и объекты". */
 public class Demo1 {
