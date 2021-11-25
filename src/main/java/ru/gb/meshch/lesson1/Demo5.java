@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson1;
+package ru.gb.meshch.lesson1;
 
 /* Презентация " Конструкторы". */
 public class Demo5 {
