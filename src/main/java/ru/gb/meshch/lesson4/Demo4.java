@@ -1,13 +1,8 @@
-package ru.geekbrains.qa.java2.lesson4;
+package ru.gb.meshch.lesson4;
 
-import com.sun.tools.javac.util.List;
+//import com.sun.tools.javac.util.List;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 // Презентация "Set". Вспоминаем hashCode. Что такое hash
 public class Demo4 {
@@ -56,8 +51,8 @@ public class Demo4 {
         Некоторые коллекции судят об "одинаковости" элементов по хэшу
         */
 
-        Set<Cat> catSet = new HashSet<>(List.of(cat1, cat2));
-        System.out.println(catSet);
+  //      Set<Cat> catSet = new HashSet<>(List.of(cat1, cat2));
+   //     System.out.println(catSet);
 
         /*
         Переопределить метод hashCode для корректной работы Set

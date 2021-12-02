@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson4;
+package ru.gb.meshch.lesson4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
