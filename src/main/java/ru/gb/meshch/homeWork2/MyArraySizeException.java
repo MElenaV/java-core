@@ -1,4 +1,4 @@
-package ru.gb.meshch.homeWork2;
+package ru.gb.meshch.HomeWork2;
 
 public class MyArraySizeException extends Exception {
 
