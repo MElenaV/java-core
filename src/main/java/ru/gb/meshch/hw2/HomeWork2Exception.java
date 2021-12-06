@@ -1,4 +1,4 @@
-package ru.gb.meshch.homeWork2;
+package ru.gb.meshch.hw2;
 
 import java.util.Scanner;
 
