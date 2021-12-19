@@ -1,0 +1,3 @@
+id=1, name=ivanov, email=ivanov@mail.ru
+id=2, name=petrov, email=petrov@mail.ru
+id=3, name=lis, email=lis@mail.ru
