@@ -1,4 +1,4 @@
-package ru.geekbrains.qa.java2.lesson7_project.project.enums;
+package ru.gb.meshch.lesson7.project.enums;
 
 public enum Periods {
     NOW,
