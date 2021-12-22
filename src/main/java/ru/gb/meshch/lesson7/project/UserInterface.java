@@ -19,6 +19,7 @@ public class UserInterface {
                 "2 - Получить погоду на следующие 5 дней, " +
                 "выход (exit) - завершить работу");
             String result = scanner.nextLine();
+            setGlobalMode(result);
 
             checkIsExit(result);
 
@@ -43,6 +44,10 @@ public class UserInterface {
             System.out.println("Завершаю работу");
             System.exit(0);
         }
+    }
+
+    private void setGlobalMode(String result) {
+        ApplicationGlobalState.getInstance().setSelectedMode(result);
     }
 
     private void setGlobalCity(String city) {

@@ -1,7 +1,7 @@
 package ru.gb.meshch.lesson7.project;
 
-import ru.geekbrains.qa.java2.lesson7_project.project.enums.Functionality;
-import ru.geekbrains.qa.java2.lesson7_project.project.enums.Periods;
+import ru.gb.meshch.lesson7.project.enums.Functionality;
+import ru.gb.meshch.lesson7.project.enums.Periods;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,7 +37,7 @@ public class Controller {
         weatherProvider.getWeather(Periods.NOW);
     }
 
-    public void getWeatherIn5Days() {
-        throw new RuntimeException("Implement in h/w");
+    public void getWeatherIn5Days() throws IOException {
+        weatherProvider.getWeather(Periods.FIVE_DAYS);
     }
 }

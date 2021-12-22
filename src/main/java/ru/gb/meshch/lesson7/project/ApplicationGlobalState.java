@@ -4,7 +4,8 @@ public final class ApplicationGlobalState {
 
     private static ApplicationGlobalState INSTANCE;
     private String selectedCity = null;
-    private final String API_KEY = "0d1tNZJPfzzT3qGokM18FGGxAUpt7hpj";
+    private String selectedMode = null;
+    private final String API_KEY = "gmYS1KV2tGO3uMK5ghjGQv6UWUzT7fEo";
 
     private ApplicationGlobalState() {
     }
@@ -16,6 +17,14 @@ public final class ApplicationGlobalState {
         }
 
         return INSTANCE;
+    }
+
+    public String getSelectedMode() {
+        return selectedMode;
+    }
+
+    public void setSelectedMode(String selectedMode) {
+        this.selectedMode = selectedMode;
     }
 
     public String getSelectedCity() {

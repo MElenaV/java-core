@@ -17,10 +17,12 @@ import java.util.List;
 public class Demo1 {
 
     public static void main(String[] args) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
+     /*   ObjectMapper objectMapper = new ObjectMapper();
         Student student = new Student("Ivan", 4.87);
         String jsonStudent = objectMapper.writeValueAsString(student);
-        System.out.println(jsonStudent);
+        System.out.println(jsonStudent);*/
+
+        readValuesToList();
 
     }
 

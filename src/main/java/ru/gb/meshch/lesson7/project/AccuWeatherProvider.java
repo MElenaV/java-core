@@ -1,13 +1,17 @@
 package ru.gb.meshch.lesson7.project;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import ru.geekbrains.qa.java2.lesson7_project.project.enums.Periods;
+import ru.gb.meshch.lesson7.project.enums.Periods;
+
 
 import java.io.IOException;
+import java.util.List;
 
 public class AccuWeatherProvider implements WeatherProvider {
 
@@ -15,10 +19,13 @@ public class AccuWeatherProvider implements WeatherProvider {
     private static final String FORECAST_ENDPOINT = "forecasts";
     private static final String CURRENT_CONDITIONS_ENDPOINT = "currentconditions";
     private static final String API_VERSION = "v1";
+    private static final String FORECAST_TYPE = "daily";
+    private static final String FORECAST_PERIOD = "5day";
     private static final String API_KEY = ApplicationGlobalState.getInstance().getApiKey();
 
     private final OkHttpClient client = new OkHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
+
 
     @Override
     public void getWeather(Periods periods) throws IOException {
@@ -39,14 +46,48 @@ public class AccuWeatherProvider implements WeatherProvider {
                 .build();
 
             Response response = client.newCall(request).execute();
-            System.out.println(response.body().string());
-            // TODO: Сделать в рамках д/з вывод более приятным для пользователя.
-            //  Создать класс WeatherResponse, десериализовать ответ сервера в экземпляр класса
-            //  Вывести пользователю только текущую температуру в C и сообщение (weather text)
+            String jsonResponse = response.body().string();
+
+            List<WeatherResponse> weatherList = objectMapper.readValue(jsonResponse, new TypeReference<List<WeatherResponse>>() {});
+            System.out.println(weatherList);
         }
+        if (periods.equals(Periods.FIVE_DAYS)) {
+            HttpUrl url = new HttpUrl.Builder()
+                    .scheme("http")
+                    .host(BASE_HOST)
+                    .addPathSegment(FORECAST_ENDPOINT)
+                    .addPathSegment(API_VERSION)
+                    .addPathSegment(FORECAST_TYPE)
+                    .addPathSegment(FORECAST_PERIOD)
+                    .addPathSegment(cityKey)
+                    .addQueryParameter("apikey", API_KEY)
+                    .addQueryParameter("language", "ru-ru")
+                    .addQueryParameter("metric", "true")
+                    .build();
+
+            System.out.println(url.toString());
+
+            // При необходимости указать заголовки
+            Request requesthttp = new Request.Builder()
+                    .addHeader("accept", "application/json")
+                    .url(url)
+                    .build();
+
+            String jsonResponse = client.newCall(requesthttp).execute().body().string();
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode dailyForecasts = objectMapper.readTree(jsonResponse).path("DailyForecasts");
+            String dailyForecastsStr = dailyForecasts.toString();
+
+            List<WeatherResponse> weatherList = objectMapper.readValue(dailyForecastsStr, new TypeReference<List<WeatherResponse>>() {});
+            System.out.println(weatherList);
+
+        }
+
     }
 
-    public String detectCityKey() throws IOException {
+    public String detectCityKey() throws IOException
+    {
         String selectedCity = ApplicationGlobalState.getInstance().getSelectedCity();
 
         HttpUrl detectLocationURL = new HttpUrl.Builder()
@@ -82,4 +123,5 @@ public class AccuWeatherProvider implements WeatherProvider {
 
         return objectMapper.readTree(jsonResponse).get(0).at("/Key").asText();
     }
+
 }
